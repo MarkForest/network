@@ -12,7 +12,7 @@ class m170708_234142_create_users_table extends Migration
      */
     public function up()
     {
-        $this->createTable('users', [
+        $this->createTable('user', [
             'id' => $this->primaryKey(),
             'firstname'=>$this->string(25)->notNull(),
             'lastname'=>$this->string(25)->notNull(),
@@ -30,6 +30,6 @@ class m170708_234142_create_users_table extends Migration
      */
     public function down()
     {
-        $this->dropTable('users');
+        $this->dropTable('user');
     }
 }

@@ -34,7 +34,7 @@ class m170709_000754_create_myprofile_table extends Migration
             'fk-myprofile-user_id',
             'myprofile',
             'user_id',
-            'users',
+            'user',
             'id',
             'CASCADE'
         );

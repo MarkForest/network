@@ -34,7 +34,7 @@ class m170709_000338_create_reletionship_table extends Migration
             'fk-reletionship-user_id',
             'reletionship',
             'user_id',
-            'users',
+            'user',
             'id',
             'CASCADE'
         );
