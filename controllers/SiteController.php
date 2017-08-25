@@ -59,8 +59,10 @@ class SiteController extends Controller
      *
      * @return string
      */
+    public $layout = 'register';
     public function actionIndex()
     {
+
         return $this->render('index');
     }
 
