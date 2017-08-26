@@ -18,9 +18,19 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/site.css',
+		'css/style.css',
+		'css/ionicons.min.css',
+        'css/font-awesome.min.css',
+        'css/emoji.css',
+        'https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i',
+        ['images/favicon.png','type'=>'image/png'],
     ];
     public $js = [
+        'js/bootstrap.min.js',
+        'js/masonry.pkgd.min.js',
+        'js/jquery.sticky-kit.min.js',
+        'js/jquery.scrollbar.min.js',
+        'js/script.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

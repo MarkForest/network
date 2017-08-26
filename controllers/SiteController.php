@@ -12,6 +12,8 @@ use app\models\ContactForm;
 
 class SiteController extends Controller
 {
+
+    public $layout = 'register';
     /**
      * @inheritdoc
      */
@@ -59,7 +61,7 @@ class SiteController extends Controller
      *
      * @return string
      */
-    public $layout = 'register';
+
     public function actionIndex()
     {
 

@@ -190,7 +190,7 @@ img.profile-photo{
 img.profile-photo-lg{
   height: 80px;
   width: 80px;
-  border-radius: 5px;
+  border-radius: 50%;
 }
 
 img.profile-photo-md{
@@ -1216,7 +1216,7 @@ ul.online-users li span.online-dot{
 
 .friend-list .friend-card .card-info img.profile-photo-lg{
   margin-top: -60px;
-  border: 7px solid #fff;
+  border: 3px solid #fff;
 }
 
 
@@ -2293,7 +2293,8 @@ ul.contact li i{
 .spinner {
   width: 40px;
   height: 40px;
-  background-color: #c7a35e;
+  background: url("/images/favicon.png");
+  background-size: cover;
   position: absolute;
   top: 48%;
   left: 48%;
