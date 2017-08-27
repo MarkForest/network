@@ -66,47 +66,40 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        if(isset($_POST['RegisterForm'])){
-            var_dump($_POST['RegisterForm']);die;
-        }
         $model=new RegisterForm();
+        $login_model=new LoginForm();
+
+        if(isset($_POST['RegisterForm'])){
+            $model->attributes = Yii::$app->request->post('RegisterForm');
+
+            if($model->validate() && $model->register()){
+                $login_model->email = $model->email;
+                $login_model->password = $model->password;
+                if($login_model->validate()){
+                    Yii::$app->user->login($login_model->getUser());
+                    return $this->redirect(['profile/','id'=>$login_model->getUser()->id]);
+                }
+            }
+        }
+
+        if (Yii::$app->request->post('LoginForm')){
+            $login_model->attributes = Yii::$app->request->post('LoginForm');
+            if($login_model->validate()){
+                Yii::$app->user->login($login_model->getUser());
+                return $this->redirect(['profile/','id'=>$login_model->getUser()->id]);
+            }
+        }
+
+        if(!Yii::$app->user->isGuest){
+            return $this->redirect(['profile/','id'=>Yii::$app->user->identity->getId()]);
+        }
 
         return $this->render('index',[
             'model'=>$model,
+            'login_model'=>$login_model,
         ]);
     }
 
-    /**
-     * Login action.
-     *
-     * @return Response|string
-     */
-    public function actionLogin()
-    {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        }
-        return $this->render('login', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Logout action.
-     *
-     * @return Response
-     */
-    public function actionLogout()
-    {
-        Yii::$app->user->logout();
-
-        return $this->goHome();
-    }
 
     /**
      * Displays contact page.
@@ -124,15 +117,5 @@ class SiteController extends Controller
         return $this->render('contact', [
             'model' => $model,
         ]);
-    }
-
-    /**
-     * Displays about page.
-     *
-     * @return string
-     */
-    public function actionAbout()
-    {
-        return $this->render('about');
     }
 }

@@ -17,6 +17,31 @@ class RegisterForm extends Model
     public $city;
     public $country;
 
+    public function rules()
+    {
+        return [
+            [['firstname', 'lastname', 'password', 'email', 'day','month','year', 'gender', 'city', 'country'], 'required'],
+            [['firstname', 'lastname', 'city', 'country'], 'string', 'max' => 25],
+            ['email','email'],
+            ['email','unique','targetClass'=>'app\models\User'],
+            [['password', 'email'], 'string', 'min'=>2,'max' => 255],
+        ];
+    }
+
+    public function register(){
+        $user = new User();
+
+        $user->firstname = $this->firstname;
+        $user->lastname = $this->lastname;
+        $user->email = $this->email;
+        $user->setPassword($this->password);
+        $user->gender = $this->gender;
+        $user->city = $this->city;
+        $user->country = $this->country;
+        $user->dateofbirth = $this->year.'-'.$this->month.'-'.$this->day;
+        return $user->save();
+    }
+
     public function getOptionsForSelect(){
 
         $itemsDay = [];

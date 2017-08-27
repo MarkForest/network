@@ -385,6 +385,15 @@ textarea{
 	border-right: 10px solid transparent;
 }
 
+#header .username {
+    margin: 0;
+}
+
+#header .username button{
+    background: none;
+    border: none;
+    color: #fff;
+}
 
 /*==================================================
   Homepage Top Banner

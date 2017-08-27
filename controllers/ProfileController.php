@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 
+use Yii;
 use yii\web\Controller;
 
 class ProfileController extends Controller
@@ -26,5 +27,12 @@ class ProfileController extends Controller
     public function actionFriends(){
 
         return $this->render('friends');
+    }
+
+    public function actionLogout()
+    {
+        Yii::$app->user->logout();
+
+        return $this->goHome();
     }
 }

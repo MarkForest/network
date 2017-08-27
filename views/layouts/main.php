@@ -6,6 +6,7 @@
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
+use yii\helpers\Url;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
@@ -29,12 +30,20 @@ AppAsset::register($this);
             <div class="row">
                 <div class="navbar-brand"><img class="img-responsive" src="/images/logo.png" alt="logo"></div>
 
+                <div class="username navbar-form navbar-right ">
+                    <?php if (!Yii::$app->user->isGuest):?>
+                    <?= Html::beginForm(['profile/logout'],'post');?>
+                        <?= Html::submitButton('Выход ('.Yii::$app->user->identity->firstname.')',['type'=>'submit'])?>
+                    <?= Html::endForm();?>
+                    <?php endif;?>
+                </div>
                 <form class="navbar-form navbar-right hidden-sm hidden-xs">
                     <div class="form-group">
                         <i class="icon ion-android-search"></i>
                         <input type="text" class="form-control" placeholder="Search friends, photos, videos">
                     </div>
                 </form>
+
             </div>
         </div>
     </header>

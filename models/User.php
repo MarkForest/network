@@ -37,16 +37,16 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
-        return [
-            [['firstname', 'lastname', 'password', 'email', 'dateofbirth', 'gender', 'city', 'country'], 'required'],
-            [['dateofbirth'], 'safe'],
-            [['gender'], 'integer'],
-            [['firstname', 'lastname', 'city', 'country'], 'string', 'max' => 25],
-            [['password', 'email'], 'string', 'max' => 255],
-        ];
-    }
+//    public function rules()
+//    {
+////        return [
+////            [['firstname', 'lastname', 'password', 'email', 'dateofbirth', 'gender', 'city', 'country'], 'required'],
+////            [['dateofbirth'], 'safe'],
+////            [['gender'], 'integer'],
+////            [['firstname', 'lastname', 'city', 'country'], 'string', 'max' => 25],
+////            [['password', 'email'], 'string', 'max' => 255],
+////        ];
+//    }
 
     /**
      * @inheritdoc
@@ -91,7 +91,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public static function findIdentity($id)
     {
-        // TODO: Implement findIdentity() method.
+        return self::findOne($id);
     }
 
     /**
@@ -114,7 +114,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function getId()
     {
-        // TODO: Implement getId() method.
+        return $this->id;
     }
 
     /**
@@ -146,4 +146,13 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     {
         // TODO: Implement validateAuthKey() method.
     }
+
+    public function setPassword($password){
+        $this->password = sha1($password);
+    }
+
+    public function validatePassword($password){
+        return $this->password === sha1($password);
+    }
+
 }

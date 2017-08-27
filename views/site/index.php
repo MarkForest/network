@@ -35,22 +35,27 @@ $this->title = 'Registration';
                             <p class="text-muted">Войдите в свой аккаунт</p>
 
                             <!--Login Form-->
-                            <form name="Login_form" id='Login_form'>
-                                <div class="row">
-                                    <div class="form-group col-xs-12">
-                                        <label for="my-email" class="sr-only">Email</label>
-                                        <input id="my-email" class="form-control input-group-lg" type="text" name="Email" title="Enter Email" placeholder="Ваш Email"/>
-                                    </div>
+                            <?php $form = ActiveForm::begin(['id'=>'login_form']);?>
+                            <div class="row">
+                                <div class="form-group col-xs-12">
+                                    <?= $form->field($login_model,'email')->textInput([
+                                            'autofocus'=>true,
+                                            'class'=>'form-control input-group-lg',
+                                            'placeholder'=>'Bаш Email',
+                                    ])->label(false)?>
                                 </div>
-                                <div class="row">
-                                    <div class="form-group col-xs-12">
-                                        <label for="my-password" class="sr-only">Password</label>
-                                        <input id="my-password" class="form-control input-group-lg" type="password" name="password" title="Enter password" placeholder="Пароль"/>
-                                    </div>
+
+
+                                <div class="form-group col-xs-12">
+                                    <?= $form->field($login_model,'password')->textInput([
+                                        'class'=>'form-control input-group-lg',
+                                        'placeholder'=>'Пароль',
+                                    ])->label(false)?>
                                 </div>
-                            </form><!--Login Form Ends-->
+                            </div>
                             <p><a href="#">Забыли пароль?</a></p>
-                            <button class="btn btn-primary">Вход в сеть</button>
+                            <button class="btn btn-primary" type="submit">Вход в сеть</button>
+                            <?php $form = ActiveForm::end();?>
                         </div>
 
                         <div class="tab-pane" id="register">
@@ -113,8 +118,8 @@ $this->title = 'Registration';
 
                                 <div class="form-group gender ">
                                         <?= $form->field($model, 'gender')->radioList([
-                                            'Мужчина'=>'Мужчина',
-                                            'Женщина'=>'Женщина',
+                                            1=>'Мужчина',
+                                            2=>'Женщина',
                                         ])->label(false)?>
                                 </div>
 
