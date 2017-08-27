@@ -876,6 +876,17 @@ textarea{
   margin-left: 10px;
 }
 
+#registration_form label{
+    font-weight: normal;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+#registration_form input[type=radio]{
+    margin-right: 10px;
+}
+
+
 /*Social Links Bottom*/
  
 #lp-register ul.social-icons{
@@ -2293,6 +2304,7 @@ ul.contact li i{
 .spinner {
   width: 40px;
   height: 40px;
+  border-radius: 10px;
   background: url("/images/favicon.png");
   background-size: cover;
   position: absolute;
@@ -2301,6 +2313,7 @@ ul.contact li i{
   box-shadow: 0 0 8px rgba(0,0,0, .3);
   -webkit-animation: sk-rotateplane 1.2s infinite ease-in-out;
   animation: sk-rotateplane 1.2s infinite ease-in-out;
+
 }
 
 @-webkit-keyframes sk-rotateplane {
