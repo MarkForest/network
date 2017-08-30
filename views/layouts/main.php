@@ -40,7 +40,7 @@ AppAsset::register($this);
                 <form class="navbar-form navbar-right hidden-sm hidden-xs">
                     <div class="form-group">
                         <i class="icon ion-android-search"></i>
-                        <input type="text" class="form-control" placeholder="Search friends, photos, videos">
+                        <input type="text" class="form-control" placeholder="Поиск друзей...">
                     </div>
                 </form>
 

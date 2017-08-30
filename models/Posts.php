@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use Faker\Provider\DateTime;
 use Yii;
 
 /**
@@ -33,8 +34,7 @@ class Posts extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['published_date'], 'safe'],
-            [['content', 'profile_id'], 'required'],
+            [['content', 'profile_id','published_date'], 'required'],
             [['content'], 'string'],
             [['profile_id'], 'integer'],
             [['image'], 'string', 'max' => 255],
@@ -76,7 +76,23 @@ class Posts extends \yii\db\ActiveRecord
      * @return \yii\db\ActiveQuery
      */
     public function getProfile()
-    {
+        {
         return $this->hasOne(Myprofile::className(), ['id' => 'profile_id']);
     }
+
+    public function diffPublishedAtCurrDate(){
+        $publishedDate = date_create($this->published_date);
+        $currDate = date_create(date('Y-m-d').'');
+        $interval = $publishedDate->diff($currDate)->format('%R%a');
+        if($interval!=0) {
+            if ($interval % $interval - 1 == 1)
+                return $interval . ' день назад';
+            if ($interval % $interval - 1 == 1)
+                return $interval . ' день назад';
+            if ($interval % $interval - 1 == 2 || $interval % $interval - 1 == 3 || $interval % $interval - 1 == 4)
+                return $interval . ' дня назад';
+            return $interval . ' дней назад';
+        }
+        else return 'Сегодня';
+        }
 }

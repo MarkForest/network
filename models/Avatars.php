@@ -33,7 +33,7 @@ class Avatars extends \yii\db\ActiveRecord
         return [
             [['profile_id'], 'required'],
             [['profile_id'], 'integer'],
-            [['main_avatar', 'mini_avatar', 'background'], 'string', 'max' => 255],
+            [['avatar', 'background'], 'string', 'max' => 255],
             [['profile_id'], 'exist', 'skipOnError' => true, 'targetClass' => Myprofile::className(), 'targetAttribute' => ['profile_id' => 'id']],
         ];
     }
@@ -45,8 +45,7 @@ class Avatars extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'main_avatar' => 'Main Avatar',
-            'mini_avatar' => 'Mini Avatar',
+            'avatar' => 'Avatar',
             'background' => 'Background',
             'profile_id' => 'Profile ID',
         ];

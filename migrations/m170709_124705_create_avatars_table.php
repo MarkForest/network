@@ -17,9 +17,9 @@ class m170709_124705_create_avatars_table extends Migration
     {
         $this->createTable('avatars', [
             'id' => $this->primaryKey(),
-            'main_avatar'=>$this->string(),
-            'mini_avatar'=>$this->string(),
-            'background'=>$this->string(),
+            'main_avatar'=>$this->string()->defaultValue('none'),
+            'mini_avatar'=>$this->string()->defaultValue('none'),
+            'background'=>$this->string()->defaultValue('none'),
             'profile_id' => $this->integer()->notNull(),
         ]);
 

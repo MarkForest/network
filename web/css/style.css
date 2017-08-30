@@ -336,11 +336,12 @@ textarea{
   border: 0;
   box-shadow: none;
   min-width: 235px;
-  color: #fff;
+  color: #939598;
   height: 24px;
   font-size: 13px;
   padding-left: 30px;
 }
+
 /*For Homepage Header | Display on Scroll*/
 
 #header.lazy-load{
@@ -387,6 +388,8 @@ textarea{
 
 #header .username {
     margin: 0;
+    padding: 0 15px;
+    text-align: right;
 }
 
 #header .username button{
@@ -734,7 +737,13 @@ textarea{
 .intro-texts{
   color: #fff;
   font-size: 14px;
-  transform: translateY(100px);
+  transform: translateY(64px);
+}
+
+.intro-texts p{
+    font-family: 'Lato', sans-serif;
+    font-style: italic;
+    font-size: 16px;
 }
 
 .intro-texts h1{
@@ -744,7 +753,7 @@ textarea{
 
 .intro-texts button{
   margin-top: 20px;
-  border-radius: 30px;
+  border-radius: 5px;
   padding: 8px 20px;
   width: 150px;
 }
@@ -1094,6 +1103,8 @@ ul.online-users li span.online-dot{
   padding: 20px;
   margin-bottom: 20px;
   border-bottom: 1px solid #f1f2f2;
+  background: #f6f6f0;
+  border-radius: 5px;
 }
 
 .create-post .form-group{
@@ -1178,6 +1189,11 @@ ul.online-users li span.online-dot{
   display: inline-flex;
   margin: 10px auto;
   width: 100%;
+}
+
+.post-content .post-container .post-detail .post-comment .add-comment{
+    padding: 6px;
+    margin-left: 10px;
 }
 
 .post-content .post-container .post-detail .post-comment img.profile-photo-sm{
@@ -1451,7 +1467,7 @@ ul.online-users li span.online-dot{
   ==================================================*/
 
 .timeline-cover{
-  background: url("../images/covers/1.jpg") no-repeat;
+  /*background: url("../images/covers/1.jpg") no-repeat;*/
   background-position: center;
   background-size: cover;
   min-height: 360px;
@@ -1531,8 +1547,8 @@ ul.online-users li span.online-dot{
 }
 
 .timeline-cover .navbar-mobile .profile-info img.profile-photo{
-  border: 10px solid #fff;
-  border-radius: 50%;
+  border: 1px solid #fff;
+  border-radius: 5px;
   height: 200px;
   margin: auto;
   width: 200px;
@@ -1570,9 +1586,20 @@ ul.online-users li span.online-dot{
 }
 
 
+
 /*==================================================
   Timeline Sidebar Right
   ==================================================*/
+#sticky-sidebar{
+    background: #f6f6f0;
+    padding: 10px;
+    border-radius: 5px;
+
+}
+
+.static{
+    margin-top: 0;
+}
 
 .feed-item{
   text-align: left;
@@ -2465,4 +2492,3 @@ ul.contact li i{
 }
 
 
-	

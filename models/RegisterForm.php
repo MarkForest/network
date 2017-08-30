@@ -29,8 +29,8 @@ class RegisterForm extends Model
     }
 
     public function register(){
+        //Регистрация пользователя
         $user = new User();
-
         $user->firstname = $this->firstname;
         $user->lastname = $this->lastname;
         $user->email = $this->email;
@@ -39,7 +39,29 @@ class RegisterForm extends Model
         $user->city = $this->city;
         $user->country = $this->country;
         $user->dateofbirth = $this->year.'-'.$this->month.'-'.$this->day;
-        return $user->save();
+        if($user->save()==false);
+
+        //Создание и первое наполнение профиля
+        $myProfile = new Myprofile();
+        $myProfile->user_id=$user->id;
+        if($myProfile->save()==false) return false;
+
+        //Кастомная аватар и фон
+        $avatars = new Avatars();
+        $avatars->profile_id = $myProfile->id;
+        $avatars->avatar=($user->gender == 2)?'user-1.jpg':'user-4.jpg';
+        $avatars->background = '3.jpg';
+        if ($avatars->save()==false) return false;
+
+        //Первая новость пользователя от администрации сайта
+        $post = new Posts();
+        $post->published_date = date('Y').'/'.date('m').'/'.date('d');
+        $post->content = "Привет! Команда LookLike поздравляет тебя с успешной регистрацией. Теперь вы можете перейти к поиску друзей...";
+        $post->profile_id = $myProfile->id;
+        $post->image = 'register_success.jpeg';
+        if($post->save()==false)return false;
+
+        return true;
     }
 
     public function getOptionsForSelect(){
@@ -327,4 +349,7 @@ class RegisterForm extends Model
         ];
 
     }
+
+
+
 }

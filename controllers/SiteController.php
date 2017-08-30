@@ -61,14 +61,14 @@ class SiteController extends Controller
     /**
      * Displays homepage.
      *
-     * @return string
+     * @return boolean
      */
-
     public function actionIndex()
     {
+
+       //Регстрация и аутентификация
         $model=new RegisterForm();
         $login_model=new LoginForm();
-
         if(isset($_POST['RegisterForm'])){
             $model->attributes = Yii::$app->request->post('RegisterForm');
 
@@ -82,6 +82,7 @@ class SiteController extends Controller
             }
         }
 
+        //Аутентификация
         if (Yii::$app->request->post('LoginForm')){
             $login_model->attributes = Yii::$app->request->post('LoginForm');
             if($login_model->validate()){
@@ -90,10 +91,12 @@ class SiteController extends Controller
             }
         }
 
+        //Перенаправления аутентифицированого пользователя
         if(!Yii::$app->user->isGuest){
             return $this->redirect(['profile/','id'=>Yii::$app->user->identity->getId()]);
         }
 
+        //Вывод форм логтна и регистрации
         return $this->render('index',[
             'model'=>$model,
             'login_model'=>$login_model,
