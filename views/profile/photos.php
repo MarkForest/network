@@ -1,30 +1,31 @@
+<?php use yii\helpers\Url;?>
+
 <div class="container">
 
     <!-- Timeline
     ================================================= -->
     <div class="timeline">
-        <div class="timeline-cover">
+        <div class="timeline-cover" style="background: url('/images/covers/<?=$avatars->background;?>') no-repeat">
 
             <!--Timeline Menu for Large Screens-->
             <div class="timeline-nav-bar hidden-sm hidden-xs">
                 <div class="row">
                     <div class="col-md-3">
                         <div class="profile-info">
-                            <img src="/images/users/user-1.jpg" alt="" class="img-responsive profile-photo" />
-                            <h3>Sarah Cruiz</h3>
-                            <p class="text-muted">Creative Director</p>
+                            <img src="/images/users/<?=$avatars->avatar?>" alt="main_avatar" class="img-responsive profile-photo">
+                            <h3><?=$user->firstname.' '.$user->lastname?></h3>
+                            <p class="text-muted"><?=$profile->job_title;?></p>
                         </div>
                     </div>
                     <div class="col-md-9">
                         <ul class="list-inline profile-menu">
-                            <li><a href="timeline.html">Timeline</a></li>
-                            <li><a href="timeline-about.html">About</a></li>
-                            <li><a href="timeline-album.html" class="active">Album</a></li>
-                            <li><a href="timeline-friends.html">Friends</a></li>
+                            <li><a href="<?=Url::toRoute(['/profile/','id'=>$user->id])?>" >Стена</a></li>
+                            <li><a href="<?=Url::toRoute(['/profile/about','id'=>$user->id])?>">Обо мне</a></li>
+                            <li><a href="<?=Url::toRoute(['/profile/photos','id'=>$user->id])?>" class="active">Фото</a></li>
+                            <li><a href="<?=Url::toRoute(['/profile/friends','id'=>$user->id])?>">Друзья</a></li>
                         </ul>
                         <ul class="follow-me list-inline">
-                            <li>1,299 people following her</li>
-                            <li><button class="btn-primary">Add Friend</button></li>
+                            <li><button class="btn btn-primary">Настроить профиль</button></li>
                         </ul>
                     </div>
                 </div>
@@ -33,21 +34,20 @@
             <!--Timeline Menu for Small Screens-->
             <div class="navbar-mobile hidden-lg hidden-md">
                 <div class="profile-info">
-                    <img src="/images/users/user-1.jpg" alt="" class="img-responsive profile-photo" />
-                    <h4>Sarah Cruiz</h4>
-                    <p class="text-muted">Creative Director</p>
+                    <img src="/images/users/<?=$avatars->avatar?>" alt="main_avatar" class="img-responsive profile-photo">
+                    <h4><?=$user->firstname.' '.$user->lastname?></h4>
+                    <p class="text-muted"><?=$profile->job_title;?></p>
                 </div>
                 <div class="mobile-menu">
                     <ul class="list-inline">
-                        <li><a href="timline.html">Timeline</a></li>
-                        <li><a href="timeline-about.html">About</a></li>
-                        <li><a href="timeline-album.html" class="active">Album</a></li>
-                        <li><a href="timeline-friends.html">Friends</a></li>
+                        <li><a href="<?=Url::toRoute(['/profile/','id'=>$user->id])?>" >Мой профиль</a></li>
+                        <li><a href="<?=Url::toRoute(['/profile/about','id'=>$user->id])?>">Обо мне</a></li>
+                        <li><a href="<?=Url::toRoute(['/profile/photos','id'=>$user->id])?>"class="active">Фото</a></li>
+                        <li><a href="<?=Url::toRoute(['/profile/friends','id'=>$user->id])?>">Друзья</a></li>
                     </ul>
-                    <button class="btn-primary">Add Friend</button>
+                    <button class="btn-primary">Настроить профиль</button>
                 </div>
             </div><!--Timeline Menu for Small Screens End-->
-
         </div>
         <div id="page-contents">
             <div class="row">
@@ -56,116 +56,26 @@
 
                     <!-- Photo Album
                     ================================================= -->
+                    <?php if (count($photos)):?>
+                    <?php $count = 0;?>
                     <ul class="album-photos">
-                        <li>
-                            <div class="img-wrapper" data-toggle="modal" data-target=".photo-1">
-                                <img src="/images/album/1.jpg" alt="photo" />
-                            </div>
-                            <div class="modal fade photo-1" tabindex="-1" role="dialog" aria-hidden="true">
-                                <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-                                        <img src="/images/album/1.jpg" alt="photo" />
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="img-wrapper" data-toggle="modal" data-target=".photo-2">
-                                <img src="/images/album/2.jpg" alt="photo" />
-                            </div>
-                            <div class="modal fade photo-2" tabindex="-1" role="dialog" aria-hidden="true">
-                                <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-                                        <img src="/images/album/2.jpg" alt="photo" />
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="img-wrapper" data-toggle="modal" data-target=".photo-3">
-                                <img src="/images/album/3.jpg" alt="photo" />
-                            </div>
-                            <div class="modal fade photo-3" tabindex="-1" role="dialog" aria-hidden="true">
-                                <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-                                        <img src="/images/album/3.jpg" alt="photo" />
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="img-wrapper" data-toggle="modal" data-target=".photo-4">
-                                <img src="/images/album/4.jpg" alt="photo" />
-                            </div>
-                            <div class="modal fade photo-4" tabindex="-1" role="dialog" aria-hidden="true">
-                                <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-                                        <img src="/images/album/4.jpg" alt="photo" />
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="img-wrapper" data-toggle="modal" data-target=".photo-5">
-                                <img src="/images/album/5.jpg" alt="photo" />
-                            </div>
-                            <div class="modal fade photo-5" tabindex="-1" role="dialog" aria-hidden="true">
-                                <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-                                        <img src="/images/album/5.jpg" alt="" />
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="img-wrapper" data-toggle="modal" data-target=".photo-6">
-                                <img src="/images/album/6.jpg" alt="photo" />
-                            </div>
-                            <div class="modal fade photo-6" tabindex="-1" role="dialog" aria-hidden="true">
-                                <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-                                        <img src="/images/album/6.jpg" alt="" />
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="img-wrapper" data-toggle="modal" data-target=".photo-7">
-                                <img src="/images/album/7.jpg" alt="photo" />
-                            </div>
-                            <div class="modal fade photo-7" tabindex="-1" role="dialog" aria-hidden="true">
-                                <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-                                        <img src="/images/album/7.jpg" alt="" />
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="img-wrapper" data-toggle="modal" data-target=".photo-8">
-                                <img src="/images/album/8.jpg" alt="photo" />
-                            </div>
-                            <div class="modal fade photo-8" tabindex="-1" role="dialog" aria-hidden="true">
-                                <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-                                        <img src="/images/album/8.jpg" alt="" />
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
+                        <?php foreach ($photos as $photo):?>
+                        <?php $count++;?>
                         <li>
                             <div class="img-wrapper" data-toggle="modal" data-target=".photo-9">
-                                <img src="/images/album/9.jpg" alt="photo" />
+                                <img src="/images/album/<?=$photo?>" alt="photo" />
                             </div>
-                            <div class="modal fade photo-9" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
                                 <div class="modal-dialog modal-lg">
                                     <div class="modal-content">
-                                        <img src="/images/album/9.jpg" alt="" />
+                                        <img src="/images/album/<?=$photo?>" alt="photo-<?=$count?>" />
                                     </div>
                                 </div>
                             </div>
                         </li>
+                        <?php endforeach;?>
                     </ul>
+                    <?php endif;?>
                 </div>
                 <div class="col-md-3 static">
                     <div id="sticky-sidebar">

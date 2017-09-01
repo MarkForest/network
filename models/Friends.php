@@ -32,7 +32,7 @@ class Friends extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['first_name', 'last_name', 'profile_id'], 'required'],
+            [['first_name', 'last_name', 'profile_id','profile_friend_id'], 'required'],
             [['profile_id'], 'integer'],
             [['first_name', 'last_name'], 'string', 'max' => 25],
             [['job_title'], 'string', 'max' => 255],

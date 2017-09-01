@@ -6,8 +6,10 @@ namespace app\controllers;
 use app\models\Avatars;
 use app\models\Comments;
 use app\models\Education;
+use app\models\Friends;
 use app\models\Languages;
 use app\models\Myprofile;
+use app\models\Photos;
 use app\models\Posts;
 use app\models\User;
 use app\models\WorkExp;
@@ -52,14 +54,33 @@ class ProfileController extends Controller
         ]);
     }
 
-    public function actionPhotos(){
+    public function actionPhotos($id){
 
-        return $this->render('photos');
+        $user = User::findOne($id);
+        $myProfile = Myprofile::findOne(['user_id'=>$id]);
+        $avatars = Avatars::findOne(['profile_id'=>$myProfile->id]);
+        $photos = Photos::find()->select(['photo'])->where(['profile_id'=>$myProfile->id])->asArray()->all();
+        return $this->render('photos',[
+            'avatars'=>$avatars,
+            'user'=>$user,
+            'profile'=>$myProfile,
+            'photos'=>$photos,
+        ]);
     }
 
-    public function actionFriends(){
+    public function actionFriends($id){
 
-        return $this->render('friends');
+        $user = User::findOne($id);
+        $myProfile = Myprofile::findOne(['user_id'=>$id]);
+        $avatars = Avatars::findOne(['profile_id'=>$myProfile->id]);
+        $friends = Friends::find()->where(['profile_id'=>$myProfile->id])->all();
+
+        return $this->render('friends',[
+            'avatars'=>$avatars,
+            'user'=>$user,
+            'profile'=>$myProfile,
+            'friends'=>$friends,
+        ]);
     }
 
     public function actionLogout()
