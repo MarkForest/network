@@ -19,7 +19,7 @@
                     </div>
                     <div class="col-md-9">
                         <ul class="list-inline profile-menu">
-                            <li><a href="<?=Url::toRoute(['/profile/','id'=>$user->id])?>" class="active">Мой профиль</a></li>
+                            <li><a href="<?=Url::toRoute(['/profile/','id'=>$user->id])?>" class="active">Стена</a></li>
                             <li><a href="<?=Url::toRoute(['/profile/about','id'=>$user->id])?>">Обо мне</a></li>
                             <li><a href="<?=Url::toRoute(['/profile/photos','id'=>$user->id])?>">Фото</a></li>
                             <li><a href="<?=Url::toRoute(['/profile/friends','id'=>$user->id])?>">Друзья</a></li>
@@ -40,15 +40,14 @@
                 </div>
                 <div class="mobile-menu">
                     <ul class="list-inline">
-                        <li><a href="timline.html" class="active">Мой профиль</a></li>
-                        <li><a href="timeline-about.html">Обо мне</a></li>
-                        <li><a href="timeline-album.html">Фото</a></li>
-                        <li><a href="timeline-friends.html">Друзья</a></li>
+                        <li><a href="<?=Url::toRoute(['/profile/','id'=>$user->id])?>" class="active">Мой профиль</a></li>
+                        <li><a href="<?=Url::toRoute(['/profile/about','id'=>$user->id])?>">Обо мне</a></li>
+                        <li><a href="<?=Url::toRoute(['/profile/photos','id'=>$user->id])?>">Фото</a></li>
+                        <li><a href="<?=Url::toRoute(['/profile/friends','id'=>$user->id])?>">Друзья</a></li>
                     </ul>
                     <button class="btn-primary">Настроить профиль</button>
                 </div>
             </div><!--Timeline Menu for Small Screens End-->
-
         </div>
         <div id="page-contents">
             <div class="row">

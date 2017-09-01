@@ -5,9 +5,12 @@ namespace app\controllers;
 
 use app\models\Avatars;
 use app\models\Comments;
+use app\models\Education;
+use app\models\Languages;
 use app\models\Myprofile;
 use app\models\Posts;
 use app\models\User;
+use app\models\WorkExp;
 use Faker\Provider\DateTime;
 use Yii;
 use yii\debug\models\search\Profile;
@@ -20,21 +23,33 @@ class ProfileController extends Controller
         $user = User::findOne($id);
         $myProfile = Myprofile::findOne(['user_id'=>$id]);
         $avatars = Avatars::findOne(['profile_id'=>$myProfile->id]);
-        $gender = $user->gender;
         $posts = Posts::find()->where(['profile_id'=>$myProfile->id])->all();
 
         return $this->render('index',[
             'avatars'=>$avatars,
-            'gender'=>$gender,
             'user'=>$user,
             'profile'=>$myProfile,
             'posts'=>$posts,
         ]);
     }
 
-    public function actionAbout(){
+    public function actionAbout($id){
 
-        return $this->render('about');
+        $user = User::findOne($id);
+        $myProfile = Myprofile::findOne(['user_id'=>$id]);
+        $avatars = Avatars::findOne(['profile_id'=>$myProfile->id]);
+        $work = WorkExp::find()->where(['profile_id'=>$myProfile->id])->all();
+        $education = Education::find()->where(['profile_id'=>$myProfile->id])->all();
+        $languages = Languages::find()->where(['profile_id'=>$myProfile->id])->all();
+
+        return $this->render('about',[
+            'avatars'=>$avatars,
+            'user'=>$user,
+            'profile'=>$myProfile,
+            'work'=>$work,
+            'education'=>$education,
+            'languages'=>$languages,
+        ]);
     }
 
     public function actionPhotos(){

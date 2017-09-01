@@ -44,6 +44,7 @@ class RegisterForm extends Model
         //Создание и первое наполнение профиля
         $myProfile = new Myprofile();
         $myProfile->user_id=$user->id;
+        $myProfile->personal_info = 'Личная информация отсутствует...';
         if($myProfile->save()==false) return false;
 
         //Кастомная аватар и фон
