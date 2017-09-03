@@ -21,6 +21,8 @@ use yii\web\Controller;
 class ProfileController extends Controller
 {
 
+
+
     public  function actionIndex($id){
         $user = User::findOne($id);
         $myProfile = Myprofile::findOne(['user_id'=>$id]);

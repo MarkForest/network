@@ -28,7 +28,7 @@ AppAsset::register($this);
     <header id="header">
         <div class="container">
             <div class="row">
-                <div class="navbar-brand"><img class="img-responsive" src="/images/logo.png" alt="logo"></div>
+                <div class="navbar-brand"><a href="<?=Url::toRoute('/site')?>"><img class="img-responsive" src="/images/logo.png" alt="logo"></a></div>
 
                 <div class="username navbar-form navbar-right ">
                     <?php if (!Yii::$app->user->isGuest):?>

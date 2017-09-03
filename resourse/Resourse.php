@@ -1,70 +1,17 @@
 <?php
 
-namespace app\models;
+namespace app\resourse;
+use app\models\User;
 
-use yii\base\Model;
-
-class RegisterForm extends Model
+/**
+ * Created by PhpStorm.
+ * User: mark
+ * Date: 03.09.17
+ * Time: 1:42
+ */
+class Resourse
 {
-    public $firstname;
-    public $lastname;
-    public $password;
-    public $email;
-    public $day;
-    public $month;
-    public $year;
-    public $gender;
-    public $city;
-    public $country;
-
-    public function rules()
-    {
-        return [
-            [['firstname', 'lastname', 'city', 'country'], 'string', 'max' => 25],
-            ['email','email'],
-            ['email','unique','targetClass'=>'app\models\User'],
-            [['password', 'email'], 'string', 'min'=>2,'max' => 255],
-        ];
-    }
-
-    public function register(){
-        //Регистрация пользователя
-        $user = new User();
-        $user->firstname = $this->firstname;
-        $user->lastname = $this->lastname;
-        $user->email = $this->email;
-        $user->setPassword($this->password);
-        $user->gender = $this->gender;
-        $user->city = $this->city;
-        $user->country = $this->country;
-        $user->dateofbirth = $this->year.'-'.$this->month.'-'.$this->day;
-        if($user->save()==false);
-
-        //Создание и первое наполнение профиля
-        $myProfile = new Myprofile();
-        $myProfile->user_id=$user->id;
-        $myProfile->personal_info = '';
-        if($myProfile->save()==false) return false;
-
-        //Кастомная аватар и фон
-        $avatars = new Avatars();
-        $avatars->profile_id = $myProfile->id;
-        $avatars->avatar=($user->gender == 2)?'user-1.jpg':'user-4.jpg';
-        $avatars->background = '3.jpg';
-        if ($avatars->save()==false) return false;
-
-        //Первая новость пользователя от администрации сайта
-        $post = new Posts();
-        $post->published_date = date('Y').'/'.date('m').'/'.date('d');
-        $post->content = "Привет! Команда LookLike поздравляет тебя с успешной регистрацией. Теперь вы можете перейти к поиску друзей...";
-        $post->profile_id = $myProfile->id;
-        $post->image = 'register_success.jpeg';
-        if($post->save()==false)return false;
-
-        return true;
-    }
-
-    public function getOptionsForSelect(){
+    static function getOptionsForSelect(){
 
         $itemsDay = [];
         for ($i=1;$i<=User::DAY_AT_MONTH; $i++){
@@ -347,9 +294,5 @@ class RegisterForm extends Model
             'itemsCountries'=>$itemsCountries,
             'paramsCountries'=>$paramsCountries,
         ];
-
     }
-
-
-
 }
