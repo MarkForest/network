@@ -1,3 +1,7 @@
+<?php
+use yii\widgets\ActiveForm;
+?>
+
 <div class="container">
 
     <!-- Timeline
@@ -25,25 +29,39 @@
                     <!-- Profile Settings
                     ================================================= -->
                     <div class="edit-profile-container">
+
+                        <?php if (isset($alertSuccessText)):?>
+                            <div class="alert alert-success">
+                                Изменения успешно сохранены.
+                            </div>
+                        <?php endif;?>
+
+                        <?php if (isset($alertDangerText)):?>
+                            <div class="alert alert-danger">
+                                Форма заполнена с ошибками
+                            </div>
+                        <?php endif;?>
+
                         <div class="block-title">
-                            <h4 class="grey"><i class="icon ion-ios-settings"></i>Account Settings</h4>
+                            <h4 class="grey"><i class="icon ion-ios-settings"></i>Настройки аккаунта</h4>
                             <div class="line"></div>
-                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate</p>
+                            <p>Настрой работу сети так как хотите Вы</p>
                             <div class="line"></div>
                         </div>
+                        <?php ActiveForm::begin();?>
                         <div class="edit-block">
                             <div class="settings-block">
                                 <div class="row">
                                     <div class="col-sm-9">
                                         <div class="switch-description">
-                                            <div><strong>Enable follow me</strong></div>
-                                            <p>Enable this if you want people to follow you</p>
+                                            <div><strong>Обо мне</strong></div>
+                                            <p>Информацию о вас видна всем. В противном случае она видна только вашим друзьям</p>
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="toggle-switch">
                                             <label class="switch">
-                                                <input type="checkbox" checked>
+                                                <input type="checkbox" name="aboutMe" value='1' <?=($setting->aboutMe==1)?'checked':''?>>
                                                 <span class="slider round"></span>
                                             </label>
                                         </div>
@@ -55,14 +73,14 @@
                                 <div class="row">
                                     <div class="col-sm-9">
                                         <div class="switch-description">
-                                            <div><strong>Send me notifications</strong></div>
-                                            <p>Send me notification emails my friends like, share or message me</p>
+                                            <div><strong>Про работу</strong></div>
+                                            <p>Информацию про Ваше место работы видна всем. В противном случае она видна только вашим друзьям</p>
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="toggle-switch">
                                             <label class="switch">
-                                                <input type="checkbox" checked>
+                                                <input type="checkbox" name="aboutWork" value="1" <?=($setting->aboutWork==1)?'checked':''?>>
                                                 <span class="slider round"></span>
                                             </label>
                                         </div>
@@ -74,14 +92,14 @@
                                 <div class="row">
                                     <div class="col-sm-9">
                                         <div class="switch-description">
-                                            <div><strong>Text messages</strong></div>
-                                            <p>Send me messages to my cell phone</p>
+                                            <div><strong>Друзья</strong></div>
+                                            <p>Включите это, если вы хотите, чтобы люди присылали вам запросы в друзья</p>
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="toggle-switch">
                                             <label class="switch">
-                                                <input type="checkbox">
+                                                <input type="checkbox" name="requestFriend" value="1" <?=($setting->requestFriend==1)?'checked':''?>>
                                                 <span class="slider round"></span>
                                             </label>
                                         </div>
@@ -93,14 +111,14 @@
                                 <div class="row">
                                     <div class="col-sm-9">
                                         <div class="switch-description">
-                                            <div><strong>Enable tagging</strong></div>
-                                            <p>Enable my friends to tag me on their posts</p>
+                                            <div><strong>Сообщения</strong></div>
+                                            <p>Получать сообщение от всех пользователей. В противном случае вы будете получать сообщение только от друзей.</p>
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="toggle-switch">
                                             <label class="switch">
-                                                <input type="checkbox" checked>
+                                                <input type="checkbox" name="messages" value="1" <?=($setting->messages==1)?'checked':''?>>
                                                 <span class="slider round"></span>
                                             </label>
                                         </div>
@@ -112,14 +130,14 @@
                                 <div class="row">
                                     <div class="col-sm-9">
                                         <div class="switch-description">
-                                            <div><strong>Enable sound</strong></div>
-                                            <p>You'll hear notification sound when someone sends you a private message</p>
+                                            <div><strong>Включить звук</strong></div>
+                                            <p>Вы услышите звук уведомления, когда кто-то отправит вам личное сообщение.</p>
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="toggle-switch">
                                             <label class="switch">
-                                                <input type="checkbox" checked>
+                                                <input type="checkbox" name="sound" value="1" <?=($setting->sound==1)?'checked':''?>>
                                                 <span class="slider round"></span>
                                             </label>
                                         </div>
@@ -127,6 +145,8 @@
                                 </div>
                             </div>
                         </div>
+                        <?=\yii\helpers\Html::submitButton('Сохранить настройки',['name'=>'btnUpdate','class'=>'btn btn-primary'])?>
+                        <?php ActiveForm::end();?>
                     </div>
                 </div>
                 <div class="col-md-2 static">

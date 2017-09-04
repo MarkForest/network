@@ -20,6 +20,7 @@ class RegisterForm extends Model
     public function rules()
     {
         return [
+            [['firstname', 'lastname', 'email', 'day','month','year', 'gender', 'city', 'country'], 'required'],
             [['firstname', 'lastname', 'city', 'country'], 'string', 'max' => 25],
             ['email','email'],
             ['email','unique','targetClass'=>'app\models\User'],
@@ -60,6 +61,11 @@ class RegisterForm extends Model
         $post->profile_id = $myProfile->id;
         $post->image = 'register_success.jpeg';
         if($post->save()==false)return false;
+
+        //Создание таблицы с настройками профиля со значениями по умолчанию
+        $settings = new Settings();
+        $settings->profile_id = $myProfile->id;
+        if($settings->save()==false)return false;
 
         return true;
     }

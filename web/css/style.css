@@ -1765,7 +1765,7 @@ ul.edit-menu li{
   list-style: none;
   border-bottom: 1px solid #f1f2f2;
   padding: 15px 0;
-  position: relative;
+    position: relative;
 }
 
 ul.edit-menu li.active::before{
@@ -1789,8 +1789,18 @@ ul.edit-menu li.active i.icon{
 
 ul.edit-menu li a{
   color: #6d6e71;
-  margin-left: 20px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+    text-decoration: none;
+    cursor: pointer;
 }
+
+
+ul.edit-menu li a:hover{
+    color: #baa063;
+
+}
+
 
 ul.edit-menu li.active a{
   color: #baa063;

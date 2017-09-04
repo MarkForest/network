@@ -4,8 +4,11 @@ namespace app\controllers;
 
 
 use app\models\Avatars;
+use app\models\ChangePasswordForm;
 use app\models\EditBasicInfoForm;
 use app\models\Myprofile;
+use app\models\SettingForm;
+use app\models\Settings;
 use app\models\User;
 use yii\web\Controller;
 use app\resourse\Resourse;
@@ -14,6 +17,7 @@ use Yii;
 class EditController extends Controller
 {
     public function actionBasic($id){
+
         $user = User::findOne($id);
         $myProfile = Myprofile::findOne(['user_id'=>$id]);
         $avatars = Avatars::findOne(['profile_id'=>$myProfile->id]);
@@ -95,24 +99,82 @@ class EditController extends Controller
     }
 
     public function actionPassword($id){
+
         $user = User::findOne($id);
         $myProfile = Myprofile::findOne(['user_id'=>$id]);
         $avatars = Avatars::findOne(['profile_id'=>$myProfile->id]);
+        $model = new ChangePasswordForm();
+
+        if (Yii::$app->request->post('ChangePasswordForm')){
+            $model->attributes = Yii::$app->request->post('ChangePasswordForm');
+            if ($model->validate()&&$model->updatePassword($user)){
+                return $this->render('password',[
+                    'avatars'=>$avatars,
+                    'user'=>$user,
+                    'profile'=>$myProfile,
+                    'model'=>$model,
+                    'alertSuccessText'=>true,
+                ]);
+            }else{
+                return $this->render('password',[
+                    'avatars'=>$avatars,
+                    'user'=>$user,
+                    'profile'=>$myProfile,
+                    'model'=>$model,
+                    'alertDangerText'=>true,
+                ]);
+            }
+        }
+
         return $this->render('password',[
             'avatars'=>$avatars,
             'user'=>$user,
             'profile'=>$myProfile,
+            'model'=>$model,
         ]);
     }
 
     public function actionSetting($id){
+
         $user = User::findOne($id);
         $myProfile = Myprofile::findOne(['user_id'=>$id]);
         $avatars = Avatars::findOne(['profile_id'=>$myProfile->id]);
+        $model = new SettingForm();
+        $setting = Settings::findOne(['profile_id'=>$myProfile->id]);
+
+        if (isset($_POST['btnUpdate'])){
+
+            isset($_POST['aboutMe'])?$model->aboutMe=1:$model->aboutMe=0;
+            isset($_POST['aboutWork'])?$model->aboutWork=1:$model->aboutWork=0;
+            isset($_POST['requestFriend'])?$model->requestFriend=1:$model->requestFriend=0;
+            isset($_POST['messages'])?$model->messages=1:$model->messages=0;
+            isset($_POST['sound'])?$model->sound=1:$model->sound=0;
+
+
+            if($model->validate()&&$model->updateSettings($setting)){
+                return $this->render('setting',[
+                    'avatars'=>$avatars,
+                    'user'=>$user,
+                    'profile'=>$myProfile,
+                    'setting'=>$setting,
+                    'alertSuccessText'=>true,
+                ]);
+            }else{
+                return $this->render('setting',[
+                    'avatars'=>$avatars,
+                    'user'=>$user,
+                    'profile'=>$myProfile,
+                    'setting'=>$setting,
+                    'alertDangerText'=>true,
+                ]);
+            }
+        }
+
         return $this->render('setting',[
             'avatars'=>$avatars,
             'user'=>$user,
             'profile'=>$myProfile,
+            'setting'=>$setting,
         ]);
     }
 

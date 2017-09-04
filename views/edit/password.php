@@ -1,3 +1,7 @@
+<?php
+use yii\widgets\ActiveForm;
+?>
+
 <div class="container">
 
     <!-- Timeline
@@ -25,33 +29,48 @@
                     <!-- Change Password
                     ================================================= -->
                     <div class="edit-profile-container">
+
+                        <?php if (isset($alertSuccessText)):?>
+                            <div class="alert alert-success">
+                                Пароль успешно изменен.
+                            </div>
+                        <?php endif;?>
+
+                        <?php if (isset($alertDangerText)):?>
+                            <div class="alert alert-danger">
+                                Текущий пароль указан с ошибками
+                            </div>
+                        <?php endif;?>
+
                         <div class="block-title">
-                            <h4 class="grey"><i class="icon ion-ios-locked-outline"></i>Change Password</h4>
+                            <h4 class="grey"><i class="icon ion-ios-locked-outline"></i>Изменить пароль</h4>
                             <div class="line"></div>
-                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate</p>
+                            <p>Здесь ты можешь поменять свой текущий пароль аккаунта. После изменения пароля не забудь нажать кнопку "Обновить пароль". Иначе изменения не сохраняться.</p>
                             <div class="line"></div>
                         </div>
                         <div class="edit-block">
-                            <form name="update-pass" id="education" class="form-inline">
+
+                            <?php $form = ActiveForm::begin(['class'=>'form-inline']);?>
+
                                 <div class="row">
                                     <div class="form-group col-xs-12">
-                                        <label for="my-password">Old password</label>
-                                        <input id="my-password" class="form-control input-group-lg" type="password" name="password" title="Enter password" placeholder="Old password"/>
+                                        <?=$form->field($model,'oldPassword')->passwordInput(['class'=>'form-control input-group-lg','title'=>'Введите пароль','placeholder'=>'Старый пароль']);?>
                                     </div>
                                 </div>
+
                                 <div class="row">
                                     <div class="form-group col-xs-6">
-                                        <label>New password</label>
-                                        <input class="form-control input-group-lg" type="password" name="password" title="Enter password" placeholder="New password"/>
+                                        <?=$form->field($model,'newPassword')->passwordInput(['class'=>'form-control input-group-lg','title'=>'Введите новый пароль','placeholder'=>'Новый пароль']);?>
                                     </div>
                                     <div class="form-group col-xs-6">
-                                        <label>Confirm password</label>
-                                        <input class="form-control input-group-lg" type="password" name="password" title="Enter password" placeholder="Confirm password"/>
+                                        <?=$form->field($model,'confirmePassword')->passwordInput(['class'=>'form-control input-group-lg','title'=>'Повторите пароль','placeholder'=>'Повторите пароль']);?>
                                     </div>
                                 </div>
-                                <p><a href="#">Forgot Password?</a></p>
-                                <button class="btn btn-primary">Update Password</button>
-                            </form>
+                                <!--<p><a href="#">Forgot Password?</a></p>-->
+                                <button type="submit" class="btn btn-primary">Обновить пароль</button>
+
+                            <?php ActiveForm::end();?>
+
                         </div>
                     </div>
                 </div>
