@@ -45,7 +45,7 @@
                             <?php if (count($education)):?>
                                 <?php foreach ($education as $university):?>
                                 <h5><?= $university->university_name?></h5>
-                                <p>c <?= $university->from?> до <?=$university->to?>года</p>
+                                <p>c <?= $university->from?> по <?=$university->to?> года</p>
                                 <?php endforeach;?>
                             <?php else:?>
                             <p>Информация отсутствует</p>

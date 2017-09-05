@@ -6,6 +6,8 @@ namespace app\controllers;
 use app\models\Avatars;
 use app\models\ChangePasswordForm;
 use app\models\EditBasicInfoForm;
+use app\models\Education;
+use app\models\EducationForm;
 use app\models\Myprofile;
 use app\models\SettingForm;
 use app\models\Settings;
@@ -178,14 +180,52 @@ class EditController extends Controller
         ]);
     }
 
-    public function actionWorkEdu($id){
+    public function actionEducation($id){
         $user = User::findOne($id);
         $myProfile = Myprofile::findOne(['user_id'=>$id]);
         $avatars = Avatars::findOne(['profile_id'=>$myProfile->id]);
-        return $this->render('work',[
+        $modelEducation = new EducationForm();
+        $education = Education::findOne(['profile_id'=>$myProfile->id]);
+        if(count($education)){
+            $modelEducation->from = $education->from;
+            $modelEducation->to = $education->to;
+        }else{
+            $modelEducation->to = date('Y');
+        }
+        $options = Resourse::getOptionsForSelect();
+
+        if(isset($_POST['EducationForm'])){
+            $modelEducation->attributes = Yii::$app->request->post('EducationForm');
+            if($modelEducation->validate()&&$modelEducation->updateEducationData($myProfile)){
+                return $this->render('education',[
+                    'avatars'=>$avatars,
+                    'user'=>$user,
+                    'profile'=>$myProfile,
+                    'modelEducation'=>$modelEducation,
+                    'options'=>$options,
+                    'education'=>$education,
+                    'alertSuccessText'=>true,
+                ]);
+            }else{
+                return $this->render('education',[
+                    'avatars'=>$avatars,
+                    'user'=>$user,
+                    'profile'=>$myProfile,
+                    'modelEducation'=>$modelEducation,
+                    'options'=>$options,
+                    'education'=>$education,
+                    'alertDangerText'=>true,
+                ]);
+            }
+        }
+
+        return $this->render('education',[
             'avatars'=>$avatars,
             'user'=>$user,
             'profile'=>$myProfile,
+            'modelEducation'=>$modelEducation,
+            'options'=>$options,
+            'education'=>$education,
         ]);
     }
 }
