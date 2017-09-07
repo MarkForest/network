@@ -42,7 +42,7 @@ class ProfileController extends Controller
         $user = User::findOne($id);
         $myProfile = Myprofile::findOne(['user_id'=>$id]);
         $avatars = Avatars::findOne(['profile_id'=>$myProfile->id]);
-        $work = WorkExp::find()->where(['profile_id'=>$myProfile->id])->all();
+        $work = WorkExp::findOne(['profile_id'=>$myProfile->id]);
         $education = Education::find()->where(['profile_id'=>$myProfile->id])->all();
         $languages = Languages::find()->where(['profile_id'=>$myProfile->id])->all();
 

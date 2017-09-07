@@ -32,7 +32,7 @@ class WorkExp extends \yii\db\ActiveRecord
     {
         return [
             [['organizetion_title', 'profile_id'], 'required'],
-            [['date_pushed', 'date_poped'], 'safe'],
+            [['from', 'to'], 'safe'],
             [['profile_id'], 'integer'],
             [['organizetion_title'], 'string', 'max' => 255],
             [['profile_id'], 'exist', 'skipOnError' => true, 'targetClass' => Myprofile::className(), 'targetAttribute' => ['profile_id' => 'id']],
@@ -47,8 +47,8 @@ class WorkExp extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'organizetion_title' => 'Organizetion Title',
-            'date_pushed' => 'Date Pushed',
-            'date_poped' => 'Date Poped',
+            'from' => 'Date Pushed',
+            'to' => 'Date Poped',
             'profile_id' => 'Profile ID',
         ];
     }

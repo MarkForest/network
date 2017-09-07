@@ -12,12 +12,18 @@ use app\models\Myprofile;
 use app\models\SettingForm;
 use app\models\Settings;
 use app\models\User;
+use app\models\WorkExp;
+use app\models\WorkForm;
 use yii\web\Controller;
 use app\resourse\Resourse;
 use Yii;
 
 class EditController extends Controller
 {
+
+    /**************************************
+         Базовые настройки
+    **************************************/
     public function actionBasic($id){
 
         $user = User::findOne($id);
@@ -100,6 +106,9 @@ class EditController extends Controller
             ]);
     }
 
+    /*************************************
+         Изменить пароль
+    *************************************/
     public function actionPassword($id){
 
         $user = User::findOne($id);
@@ -136,6 +145,9 @@ class EditController extends Controller
         ]);
     }
 
+    /********************************
+         Настройки аккаунта
+    ********************************/
     public function actionSetting($id){
 
         $user = User::findOne($id);
@@ -180,6 +192,9 @@ class EditController extends Controller
         ]);
     }
 
+    /************************************
+         Сведенья про образование
+    ************************************/
     public function actionEducation($id){
         $user = User::findOne($id);
         $myProfile = Myprofile::findOne(['user_id'=>$id]);
@@ -226,6 +241,59 @@ class EditController extends Controller
             'modelEducation'=>$modelEducation,
             'options'=>$options,
             'education'=>$education,
+        ]);
+    }
+
+
+
+    /***********************************
+         Настройки работы
+    ***********************************/
+    public function actionWork($id){
+
+        $user = User::findOne($id);
+        $myProfile = Myprofile::findOne(['user_id'=>$id]);
+        $avatars = Avatars::findOne(['profile_id'=>$myProfile->id]);
+        $modelWork = new WorkForm();
+        $options = Resourse::getOptionsForSelect();
+        $options['itemsYear']['present'] = 'Текущее время';
+        $work = WorkExp::findOne(['profile_id'=>$myProfile->id]);
+
+        if (isset($_POST['WorkForm'])){
+            $modelWork->attributes = Yii::$app->request->post('WorkForm');
+
+            if ($modelWork->validate()&&$modelWork->updateWork($myProfile)){
+                $work = WorkExp::findOne(['profile_id'=>$myProfile->id]);
+                return $this->render('work',[
+                    'avatars'=>$avatars,
+                    'user'=>$user,
+                    'profile'=>$myProfile,
+                    'model'=>$modelWork,
+                    'options'=>$options,
+                    'alertSuccessText'=>true,
+                    'work'=>$work,
+                ]);
+            }else{
+                return $this->render('work',[
+                    'avatars'=>$avatars,
+                    'user'=>$user,
+                    'profile'=>$myProfile,
+                    'model'=>$modelWork,
+                    'options'=>$options,
+                    'alertDangerText'=>true,
+                    'work'=>$work,
+                ]);
+            }
+        }
+
+
+        return $this->render('work',[
+            'avatars'=>$avatars,
+            'user'=>$user,
+            'profile'=>$myProfile,
+            'model'=>$modelWork,
+            'options'=>$options,
+            'work'=>$work,
         ]);
     }
 }

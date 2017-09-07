@@ -21,7 +21,7 @@ use yii\widgets\ActiveForm;
                     <!--Edit Profile Menu-->
                     <?= $this->render('/staticBlocks/editMenu',[
                         'user'=>$user,
-                        'activeLabel'=>'work'
+                        'activeLabel'=>'education'
                     ])?>
 
                 </div>
