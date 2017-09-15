@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\resourse\Resourse;
 use Yii;
 
 /**
@@ -21,6 +22,8 @@ use Yii;
  */
 class Photos extends \yii\db\ActiveRecord
 {
+
+    static public $DIR_PHOTO = 'images/album';
     /**
      * @inheritdoc
      */
@@ -35,11 +38,10 @@ class Photos extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['photo', 'published_date', 'autor', 'mini_avatar', 'profile_id'], 'required'],
-            [['published_date'], 'safe'],
+            [['photo', 'published_date', 'autor', 'avatar', 'profile_id'], 'required'],
             [['discription'], 'string'],
             [['profile_id'], 'integer'],
-            [['photo', 'autor', 'mini_avatar'], 'string', 'max' => 255],
+            [['photo', 'autor', 'avatar'], 'string', 'max' => 255],
             [['profile_id'], 'exist', 'skipOnError' => true, 'targetClass' => Myprofile::className(), 'targetAttribute' => ['profile_id' => 'id']],
         ];
     }
@@ -54,7 +56,7 @@ class Photos extends \yii\db\ActiveRecord
             'photo' => 'Photo',
             'published_date' => 'Published Date',
             'autor' => 'Autor',
-            'mini_avatar' => 'Mini Avatar',
+            'avatar' => 'Mini Avatar',
             'discription' => 'Discription',
             'profile_id' => 'Profile ID',
         ];
@@ -82,5 +84,16 @@ class Photos extends \yii\db\ActiveRecord
     public function getProfile()
     {
         return $this->hasOne(Myprofile::className(), ['id' => 'profile_id']);
+    }
+
+    public function savePhoto(UploadFileForm $model,$profile_id,User $user,Avatars $avatar ){
+        $this->photo = $model->image;
+        $this->discription = $model->discription;
+        $this->published_date = date('Y').'-'.date('m').'-'.date('d');
+        $this->autor = $user->firstname.' '.$user->lastname;
+        $this->avatar = $avatar->avatar;
+        $this->profile_id = $profile_id;
+
+        return $this->save()?true:false;
     }
 }

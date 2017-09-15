@@ -63,6 +63,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             'gender' => 'Gender',
             'city' => 'City',
             'country' => 'Country',
+
         ];
     }
 
@@ -105,7 +106,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        // TODO: Implement findIdentityByAccessToken() method.
+
     }
 
     /**

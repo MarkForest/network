@@ -212,7 +212,13 @@ img.profile-photo-xs{
 }
 
 .img-wrapper{
-  position: relative;
+    position: relative;
+    background: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 180px;
+    height:200px;
+    margin-right: 10px;
 }
 
 .img-wrapper::after{
@@ -1729,12 +1735,14 @@ ul.interests span.int-icons{
 /*==================================================
   Profile Album
   ==================================================*/
+.add-photo >.btn-primary{
+    margin-bottom: 25px;
+}
 
 ul.album-photos{
   padding: 0;
   margin: 0 auto 20px;
   display: block;
-  font-size: 0;
   text-align: center;
 }
 
@@ -1749,6 +1757,21 @@ ul.album-photos li img{
   max-width: 100%;
 }
 
+
+ul.album-photos li i{
+    color: red;
+    display: inline-block;
+}
+
+
+ul.album-photos .thumbnail{
+    text-align: right;
+}
+
+
+ul.album-photos li .thumbnail a:hover{
+    text-decoration: none;
+}
 
 /*==================================================
   Edit Profile
@@ -2502,4 +2525,14 @@ ul.contact li i{
           filter: blur(5px);
 }
 
+/*==================================================
+   Input upload file
+  ==================================================*/
 
+.modal-body  {
+    background: #f6f6f0;
+}
+
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control{
+    background: #fff;
+}

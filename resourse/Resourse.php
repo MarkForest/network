@@ -11,6 +11,7 @@ use app\models\User;
  */
 class Resourse
 {
+
     static function getOptionsForSelect(){
 
         $itemsDay = [];
@@ -294,5 +295,10 @@ class Resourse
             'itemsCountries'=>$itemsCountries,
             'paramsCountries'=>$paramsCountries,
         ];
+    }
+
+    public static function dateToString()
+    {
+        return date('Y').'-'.date('mm').'-'.date('dd');
     }
 }

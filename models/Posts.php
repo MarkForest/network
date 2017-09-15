@@ -4,6 +4,9 @@ namespace app\models;
 
 use Faker\Provider\DateTime;
 use Yii;
+use yii\helpers\Url;
+use yii\web\Link;
+use yii\web\Linkable;
 
 /**
  * This is the model class for table "posts".
@@ -18,7 +21,7 @@ use Yii;
  * @property Likeposts[] $likeposts
  * @property Myprofile $profile
  */
-class Posts extends \yii\db\ActiveRecord
+class Posts extends \yii\db\ActiveRecord implements Linkable
 {
     /**
      * @inheritdoc
@@ -95,4 +98,28 @@ class Posts extends \yii\db\ActiveRecord
         }
         else return 'Сегодня';
         }
+
+    /*******************************************
+             For Api application
+     ******************************************/
+
+    /**
+     * Перечислям поля которые будут отдаваться api приложением
+     */
+    public function fields()
+    {
+        return [
+            'id','image','published_date','content','profile_id',
+        ];
+    }
+
+    /**
+     * @return array the links
+     */
+    public function getLinks()
+    {
+        return [
+            Link::REL_SELF => Url::to(['user/view', 'id' => $this->id], true),
+        ];
+    }
 }

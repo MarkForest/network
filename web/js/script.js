@@ -165,3 +165,6 @@ function initMap() {
     map: map
   });
 }
+
+$(":file").filestyle({btnClass: "btn-primary"});
+

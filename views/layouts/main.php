@@ -7,6 +7,7 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\helpers\Url;
+use yii\widgets\ActiveForm;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
@@ -127,6 +128,7 @@ AppAsset::register($this);
     <div id="spinner-wrapper">
         <div class="spinner"></div>
     </div>
+
 <?php $this->endBody() ?>
 </body>
 </html>
